@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sonali Singh — Portfolio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+  :root {
+    --ink: #0d1117;
+    --cream: #f7f3ee;
+    --gold: #c9a84c;
+    --rose: #c96b6b;
+    --teal: #2a7a7a;
+    --soft: #e8e2d9;
+  }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', Georgia, serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top:0; width:100%; z-index:100;
+    padding: 20px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(247,243,238,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--soft);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.3rem; font-weight: 700;
+    letter-spacing: 0.02em; color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display:flex; gap:36px; list-style:none; }
+  .nav-links a {
+    font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink); text-decoration: none; font-weight: 500;
+    position: relative; padding-bottom: 2px;
+  }
+  .nav-links a::after {
+    content:''; position:absolute; bottom:0; left:0;
+    width:0; height:1.5px; background: var(--gold);
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover::after { width:100%; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 120px 60px 60px;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg-text {
+    position: absolute; right: -40px; bottom: 40px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(120px, 18vw, 220px);
+    font-weight: 900; color: transparent;
+    -webkit-text-stroke: 1px rgba(201,168,76,0.15);
+    line-height: 1; pointer-events: none;
+    user-select: none; z-index: 0;
+  }
+  .hero-left { position: relative; z-index:1; }
+  .hero-eyebrow {
+    font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--teal); font-weight: 500; margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content:''; display:block; width:40px; height:1px; background:var(--teal);
+  }
+  .hero-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(48px, 7vw, 88px);
+    font-weight: 900; line-height: 1.0;
+    margin-bottom: 24px; color: var(--ink);
+  }
+  .hero-name em { font-style: italic; color: var(--gold); }
+  .hero-desc {
+    font-size: 1.05rem; line-height: 1.75; color: #555;
+    max-width: 420px; margin-bottom: 40px; font-weight: 300;
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--ink); color: var(--cream);
+    padding: 14px 32px; text-decoration: none;
+    font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
+    font-weight: 500; transition: background 0.3s, transform 0.2s;
+  }
+  .hero-cta:hover { background: var(--gold); color: var(--ink); transform: translateY(-2px); }
+  .hero-right {
+    position: relative; z-index:1;
+    display: flex; flex-direction: column; gap: 20px;
+    padding-left: 60px;
+  }
+  .stat-card {
+    background: white;
+    border: 1px solid var(--soft);
+    padding: 24px 28px;
+    position: relative; overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .stat-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+  .stat-card::before {
+    content:''; position:absolute; top:0; left:0;
+    width:3px; height:100%; background: var(--gold);
+  }
+  .stat-card:nth-child(2)::before { background: var(--teal); }
+  .stat-card:nth-child(3)::before { background: var(--rose); }
+  .stat-num {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2.4rem; font-weight: 700; color: var(--ink);
+  }
+  .stat-label { font-size: 0.82rem; color: #777; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; }
+
+  /* SECTIONS */
+  section { padding: 100px 60px; }
+  .section-label {
+    font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold); font-weight: 500; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::after { content:''; flex:1; max-width:60px; height:1px; background:var(--gold); }
+  .section-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(32px, 5vw, 52px); font-weight: 700;
+    line-height: 1.15; margin-bottom: 60px; color: var(--ink);
+  }
+
+  /* ABOUT */
+  #about { background: white; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .about-text p { font-size: 1rem; line-height: 1.85; color: #555; margin-bottom: 20px; font-weight: 300; }
+  .about-details { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
+  .detail-row { display: flex; gap: 16px; align-items: baseline; }
+  .detail-key { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); min-width: 100px; font-weight: 500; }
+  .detail-val { font-size: 0.95rem; color: var(--ink); }
+
+  /* SKILLS */
+  #skills { background: var(--cream); }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .skill-card {
+    background: white; border: 1px solid var(--soft);
+    padding: 32px; transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .skill-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.08); }
+  .skill-icon { font-size: 2rem; margin-bottom: 16px; }
+  .skill-cat { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); font-weight: 500; margin-bottom: 8px; }
+  .skill-name { font-family: 'Playfair Display', Georgia, serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    font-size: 0.72rem; padding: 4px 12px;
+    background: var(--soft); color: var(--ink);
+    letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500;
+    border: 1px solid transparent; transition: all 0.2s;
+  }
+  .tag:hover { background: var(--gold); color: white; }
+
+  /* EXPERIENCE */
+  #experience { background: white; }
+  .exp-list { display: flex; flex-direction: column; }
+  .exp-item {
+    display: grid; grid-template-columns: 200px 1fr;
+    gap: 40px; padding: 40px 0;
+    border-bottom: 1px solid var(--soft);
+  }
+  .exp-item:last-child { border-bottom: none; }
+  .exp-date { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: #999; padding-top: 4px; }
+  .exp-role { font-family: 'Playfair Display', Georgia, serif; font-size: 1.35rem; font-weight: 700; margin-bottom: 4px; }
+  .exp-company { font-size: 0.9rem; color: var(--teal); margin-bottom: 16px; font-weight: 500; }
+  .exp-bullets { display: flex; flex-direction: column; gap: 8px; }
+  .exp-bullets li {
+    font-size: 0.92rem; color: #555; line-height: 1.65; font-weight: 300;
+    padding-left: 16px; position: relative; list-style: none;
+  }
+  .exp-bullets li::before {
+    content:''; position:absolute; left:0; top:10px;
+    width:5px; height:1px; background: var(--gold);
+  }
+
+  /* CERTIFICATIONS */
+  #certifications { background: var(--ink); color: var(--cream); }
+  #certifications .section-label { color: var(--gold); }
+  #certifications .section-label::after { background: var(--gold); }
+  #certifications .section-title { color: var(--cream); }
+  .cert-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .cert-card {
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 28px;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .cert-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+  .cert-issuer { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; font-weight: 500; }
+  .cert-name { font-family: 'Playfair Display', Georgia, serif; font-size: 1.05rem; font-weight: 700; color: var(--cream); margin-bottom: 8px; line-height: 1.4; }
+  .cert-date { font-size: 0.78rem; color: rgba(255,255,255,0.4); }
+
+  /* PROJECTS */
+  #projects { background: var(--cream); }
+  .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .proj-card {
+    background: white; border: 1px solid var(--soft);
+    padding: 36px; display: flex; flex-direction: column; gap: 16px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .proj-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.08); }
+  .proj-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .proj-tag {
+    font-size: 0.68rem; padding: 3px 10px;
+    background: var(--ink); color: var(--cream);
+    letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500;
+  }
+  .proj-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.4rem; font-weight: 700; color: var(--ink); line-height: 1.2;
+  }
+  .proj-desc { font-size: 0.9rem; color: #555; line-height: 1.75; font-weight: 300; }
+  .proj-links { display: flex; gap: 12px; margin-top: 8px; }
+  .proj-btn {
+    display: inline-block; padding: 10px 20px;
+    border: 1.5px solid var(--ink); font-size: 0.78rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    text-decoration: none; color: var(--ink); font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+  }
+  .proj-btn:hover { background: var(--gold); border-color: var(--gold); color: white; }
+  @media (max-width: 900px) { .proj-grid { grid-template-columns: 1fr; } }
+
+  /* CONTACT */
+  #contact { background: white; }
+  .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .contact-info { display: flex; flex-direction: column; gap: 16px; }
+  .contact-row {
+    display: flex; align-items: center; gap: 16px;
+    padding: 18px 20px; border: 1.5px solid var(--soft);
+    text-decoration: none; color: var(--ink);
+    background: white;
+    transition: border-color 0.3s, transform 0.2s, background 0.2s;
+  }
+  .contact-row:hover { border-color: var(--gold); transform: translateX(4px); background: #fffdf9; }
+  .contact-icon { font-size: 1.4rem; width: 44px; text-align: center; }
+  .contact-detail-key { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+  .contact-detail-val { font-size: 0.92rem; color: var(--ink); margin-top: 2px; }
+  .contact-quote {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.6rem; font-weight: 400; font-style: italic;
+    line-height: 1.6; color: var(--ink);
+    padding: 40px; border-left: 3px solid var(--gold);
+    background: var(--cream);
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 32px 60px;
+    border-top: 1px solid var(--soft);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.78rem; color: #999; letter-spacing: 0.06em;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    #hero, .about-grid, .contact-inner { grid-template-columns: 1fr; }
+    section { padding: 70px 24px; }
+    #hero { padding: 100px 24px 60px; }
+    .hero-right { padding-left: 0; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .cert-grid { grid-template-columns: 1fr; }
+    .exp-item { grid-template-columns: 1fr; gap: 8px; }
+    footer { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Sonali Singh</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-text">SS</div>
+  <div class="hero-left">
+    <div class="hero-eyebrow">Computer Science Engineer</div>
+    <h1 class="hero-name">Sonali<br/><em>Singh</em></h1>
+    <p class="hero-desc">3rd year CS Engineering student from Varanasi, building at the intersection of Python, Web Development, and Artificial Intelligence.</p>
+    <a href="#contact" class="hero-cta">Get in touch →</a>
+  </div>
+  <div class="hero-right">
+    <div class="stat-card">
+      <div class="stat-num">8.61</div>
+      <div class="stat-label">Latest Semester CGPA</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">8+</div>
+      <div class="stat-label">Certifications Earned</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">1.1K+</div>
+      <div class="stat-label">LinkedIn Followers</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">Who I Am</div>
+  <h2 class="section-title">A little about me.</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm Sonali Singh, a passionate Computer Science Engineering student at APJ Abdul Kalam Technical University (AKTU), currently in my 3rd year and expected to graduate in 2027.</p>
+      <p>I love building things with code — whether it's writing clean Python scripts, designing frontend interfaces, or exploring the rapidly evolving world of Artificial Intelligence. I believe in learning by doing and constantly pushing my boundaries.</p>
+      <p>When I'm not coding, I'm sharing my learning journey on LinkedIn and inspiring other students to explore tech opportunities.</p>
+    </div>
+    <div>
+      <div class="about-details">
+        <div class="detail-row"><span class="detail-key">University</span><span class="detail-val">AKTU, Uttar Pradesh</span></div>
+        <div class="detail-row"><span class="detail-key">Degree</span><span class="detail-val">B.Tech – CSE</span></div>
+        <div class="detail-row"><span class="detail-key">Year</span><span class="detail-val">3rd Year (2023–2027)</span></div>
+        <div class="detail-row"><span class="detail-key">Location</span><span class="detail-val">Varanasi, Uttar Pradesh</span></div>
+        <div class="detail-row"><span class="detail-key">CGPA</span><span class="detail-val">S1: 8.18 · S2: 8.00 · S3: 8.76 · S4: 7.87 · S5: 8.61</span></div>
+        <div class="detail-row"><span class="detail-key">Goal</span><span class="detail-val">Software Engineer</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">What I Know</div>
+  <h2 class="section-title">Technical Skills.</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">⚡</div>
+      <div class="skill-cat">Languages</div>
+      <div class="skill-name">Programming</div>
+      <div class="skill-tags"><span class="tag">Python</span><span class="tag">C</span></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🌐</div>
+      <div class="skill-cat">Frontend</div>
+      <div class="skill-name">Web Development</div>
+      <div class="skill-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🤖</div>
+      <div class="skill-cat">Emerging Tech</div>
+      <div class="skill-name">AI & Data</div>
+      <div class="skill-tags"><span class="tag">Generative AI</span><span class="tag">Data Science</span><span class="tag">ML</span></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🔐</div>
+      <div class="skill-cat">Security</div>
+      <div class="skill-name">Cybersecurity</div>
+      <div class="skill-tags"><span class="tag">Network Security</span><span class="tag">Threat Analysis</span></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🧠</div>
+      <div class="skill-cat">Core</div>
+      <div class="skill-name">Problem Solving</div>
+      <div class="skill-tags"><span class="tag">Algorithms</span><span class="tag">Logic</span><span class="tag">DSA</span></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🤝</div>
+      <div class="skill-cat">Soft Skills</div>
+      <div class="skill-name">People Skills</div>
+      <div class="skill-tags"><span class="tag">Leadership</span><span class="tag">Communication</span><span class="tag">Teamwork</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">My Journey</div>
+  <h2 class="section-title">Experience.</h2>
+  <div class="exp-list">
+    <div class="exp-item">
+      <div class="exp-date">Mar 2026</div>
+      <div class="exp-right">
+        <div class="exp-role">Campus Ambassador</div>
+        <div class="exp-company">My Job Grow × Elan & nVision, IIT Hyderabad</div>
+        <ul class="exp-bullets">
+          <li>Recognized for outstanding dedication and leadership as a Campus Ambassador for My Job Grow.</li>
+          <li>Contributed to brand growth and campus engagement in collaboration with Elan & nVision, IIT Hyderabad.</li>
+          <li>Represented the organization at the college level, building professional networking and branding skills.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">Feb – Mar 2026</div>
+      <div class="exp-right">
+        <div class="exp-role">Student Partner – ISP Program</div>
+        <div class="exp-company">Internshala, Gurugram (Remote)</div>
+        <ul class="exp-bullets">
+          <li>Selected as Internshala Student Partner to promote internship and learning opportunities among college students.</li>
+          <li>Motivated students to enroll in online Internshala Trainings and helped them find relevant internships & jobs.</li>
+          <li>Participated in social media branding campaigns and developed communication and outreach skills.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">Dec 2024 – Jan 2025</div>
+      <div class="exp-right">
+        <div class="exp-role">Python Programming Trainee</div>
+        <div class="exp-company">CodTech IT Solutions</div>
+        <ul class="exp-bullets">
+          <li>Completed an intensive training program in Python programming focusing on core concepts and practical implementation.</li>
+          <li>Worked on programming exercises to strengthen problem-solving and coding skills.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-label">Credentials</div>
+  <h2 class="section-title">Certifications.</h2>
+  <div class="cert-grid">
+    <div class="cert-card">
+      <div class="cert-issuer">My Job Grow × Elan & nVision, IIT Hyderabad</div>
+      <div class="cert-name">Certificate of Campus Ambassador</div>
+      <div class="cert-date">March 25, 2026</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">CodTech IT Solutions</div>
+      <div class="cert-name">Python Programming – Training Program</div>
+      <div class="cert-date">December 2024 – January 2025</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">Infosys Springboard</div>
+      <div class="cert-name">Generative AI for All</div>
+      <div class="cert-date">June 2025</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">Microsoft</div>
+      <div class="cert-name">Introduction to Generative AI Concepts</div>
+      <div class="cert-date">July 2025</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">Google Cloud / Simplilearn SkillUp</div>
+      <div class="cert-name">Introduction to Generative AI</div>
+      <div class="cert-date">September 2025</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">Cisco Networking Academy</div>
+      <div class="cert-name">Introduction to Cybersecurity</div>
+      <div class="cert-date">2025</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">UNICEF YuWaah</div>
+      <div class="cert-name">Digital Productivity with AI</div>
+      <div class="cert-date">February 2026</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">Board Infinity</div>
+      <div class="cert-name">Data Science for Beginners</div>
+      <div class="cert-date">February 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">My Work</div>
+  <h2 class="section-title">Projects.</h2>
+  <div class="proj-grid">
+
+    <div class="proj-card">
+      <div class="proj-tags">
+        <span class="proj-tag">HTML</span>
+        <span class="proj-tag">CSS</span>
+        <span class="proj-tag">JavaScript</span>
+      </div>
+      <div class="proj-title">Number Guessing Game</div>
+      <div class="proj-desc">An interactive browser-based game with 3 difficulty levels — Easy (1–50), Medium (1–100), and Hard (1–200). Features real-time attempt tracking, color-coded guess history, progress bar, and best score system. Fully responsive with a custom dark theme and smooth animations.</div>
+      <div class="proj-links">
+        <a href="https://sonalisingh16.github.io/number-guessing-game" target="_blank" class="proj-btn">🔗 Live Demo</a>
+        <a href="https://github.com/SonaliSingh16/number-guessing-game" target="_blank" class="proj-btn">🐙 GitHub</a>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-tags">
+        <span class="proj-tag">HTML</span>
+        <span class="proj-tag">CSS</span>
+        <span class="proj-tag">JavaScript</span>
+      </div>
+      <div class="proj-title">Personal Portfolio Website</div>
+      <div class="proj-desc">A fully custom-coded personal portfolio website built from scratch without any frameworks. Features a responsive layout, smooth hover animations, dark certifications section, and structured sections for skills, experience, and contact — deployed on GitHub Pages.</div>
+      <div class="proj-links">
+        <a href="https://sonalisingh16.github.io/portfolio" target="_blank" class="proj-btn">🔗 Live Site</a>
+        <a href="https://github.com/SonaliSingh16/portfolio" target="_blank" class="proj-btn">🐙 GitHub</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Say Hello</div>
+  <h2 class="section-title">Let's Connect.</h2>
+  <div class="contact-inner">
+    <div class="contact-info">
+      <a class="contact-row" href="tel:+919889113168">
+        <div class="contact-icon">📞</div>
+        <div>
+          <div class="contact-detail-key">Phone</div>
+          <div class="contact-detail-val">+91 9889113168</div>
+        </div>
+      </a>
+      <a class="contact-row" href="mailto:sonalisinghgautam2004@gmail.com">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <div class="contact-detail-key">Email</div>
+          <div class="contact-detail-val">sonalisinghgautam2004@gmail.com</div>
+        </div>
+      </a>
+      <a class="contact-row" href="https://www.linkedin.com/in/sonali-singh-911807292" target="_blank">
+        <div class="contact-icon">💼</div>
+        <div>
+          <div class="contact-detail-key">LinkedIn</div>
+          <div class="contact-detail-val">linkedin.com/in/sonali-singh-911807292</div>
+        </div>
+      </a>
+      <a class="contact-row" href="https://github.com/SonaliSingh16" target="_blank">
+        <div class="contact-icon">🐙</div>
+        <div>
+          <div class="contact-detail-key">GitHub</div>
+          <div class="contact-detail-val">github.com/SonaliSingh16</div>
+        </div>
+      </a>
+      <a class="contact-row" href="#">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-detail-key">Location</div>
+          <div class="contact-detail-val">Varanasi, Uttar Pradesh, India</div>
+        </div>
+      </a>
+    </div>
+    <div class="contact-quote">
+      "Every line of code I write is a step closer to the software engineer I'm becoming — one project, one certificate, one opportunity at a time."
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 Sonali Singh</span>
+  <span>CS Engineering · AKTU · Varanasi</span>
+</footer>
+
+</body>
+</html>
